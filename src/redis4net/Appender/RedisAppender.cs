@@ -11,7 +11,9 @@ namespace redis4net.Appender
 		protected ConnectionFactory ConnectionFactory { get; set; }
 		public string RemoteAddress { get; set; }
 		public int RemotePort { get; set; }
-		public string ListName { get; set; }
+        public string Password { get; set; }
+        public bool EnableSSL { get; set; }
+        public string ListName { get; set; }
 
 		public override void ActivateOptions()
 		{
@@ -23,7 +25,7 @@ namespace redis4net.Appender
 		protected virtual void InitializeConnectionFactory()
 		{
 			var connection = new Connection();
-			ConnectionFactory = new ConnectionFactory(connection, RemoteAddress, RemotePort, 1, ListName);
+			ConnectionFactory = new ConnectionFactory(connection, RemoteAddress, RemotePort, Password, EnableSSL, 1, ListName);
 		}
 
 		protected override void Append(log4net.Core.LoggingEvent loggingEvent)
