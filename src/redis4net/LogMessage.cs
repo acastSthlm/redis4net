@@ -42,25 +42,43 @@ namespace redis4net
 			}
 		}
 
-		public long SysLogLevel
-		{
-			get
-			{
-				if (!this.ContainsKey("sysloglevel"))
-					return int.MinValue;
+        public int Level
+        {
+            get
+            {
+                if (!this.ContainsKey("level"))
+                    return int.MinValue;
 
-				return (long)this["sysloglevel"];
-			}
-			set
-			{
-				if (!this.ContainsKey("sysloglevel"))
-					this.Add("sysloglevel", value);
-				else
-					this["sysloglevel"] = value;
-			}
-		}
+                return (int)this["level"];
+            }
+            set
+            {
+                if (!this.ContainsKey("level"))
+                    this.Add("level", value);
+                else
+                    this["level"] = value;
+            }
+        }
 
-		public string Host
+        public string LevelName
+        {
+            get
+            {
+                if (!this.ContainsKey("levelname"))
+                    return "INFO";
+
+                return (string)this["levelname"];
+            }
+            set
+            {
+                if (!this.ContainsKey("levelname"))
+                    this.Add("levelname", value);
+                else
+                    this["levelname"] = value;
+            }
+        }
+
+        public string Host
 		{
 			get
 			{
@@ -114,25 +132,22 @@ namespace redis4net
 			}
 		}
 
-		public DateTime TimeStamp
-		{
-			get
-			{
-				if (!this.ContainsKey("timestamp"))
-					return DateTime.MinValue;
+        public string Time
+        {
+            get
+            {
+                if (!this.ContainsKey("time"))
+                    return DateTime.MinValue.ToShortDateString();
 
-				var val = this["timestamp"];
-				double value;
-				var parsed = double.TryParse(val as string, NumberStyles.Any, CultureInfo.InvariantCulture, out value);
-				return parsed ? value.FromUnixTimestamp() : DateTime.MinValue;
-			}
-			set
-			{
-				if (!this.ContainsKey("timestamp"))
-					this.Add("timestamp", value.ToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
-				else
-					this["timestamp"] = value.ToUnixTimestamp().ToString(CultureInfo.InvariantCulture);
-			}
-		}
-	}
+                return (string)this["time"]; ;
+            }
+            set
+            {
+                if (!this.ContainsKey("time"))
+                    this.Add("time", value);
+                else
+                    this["time"] = value;
+            }
+        }
+    }
 }

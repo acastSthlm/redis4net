@@ -87,8 +87,9 @@ namespace redis4netTests.Layout
 
 			Assert.AreEqual(result.Message, message);
 			Assert.AreEqual(result.Host, Environment.MachineName);
-			Assert.AreEqual(result.SysLogLevel, (int)LocalSyslogAppender.SyslogSeverity.Debug);
-			Assert.IsTrue(result.TimeStamp >= DateTime.Now.AddMinutes(-1));
+			Assert.AreEqual(result.Level, 30);
+            Assert.AreEqual(result.LevelName, "DEBUG");
+            Assert.IsNotEmpty(result.Time);
 		}
 
 		[Test]
