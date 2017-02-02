@@ -2,9 +2,14 @@
 redis4net is a log4net appender that formats logs and adds them to redis lists. This is useful when you have another system like logstash which indexes yours 
 logs. The redis lists that you write to can feed into the logstash indexer.
 
-## Installation
+## Installation (Acast)
 
-Working on a nuget package. Meantime, please check out the source code. 
+Nuget package available via gemfury nuget feed (the alternative private repo).
+
+1) Bump to new version in assemblyinfo
+2) Install nuget-cli if you haven't already.
+3) Go to same directory as project file and run nuget pack redis4net.csproj to create new nuget package
+4) Upload the package to gemfury https://gemfury.com/help/upload-packages
 
 ## Configuration
 
@@ -34,6 +39,8 @@ data types of fields within the same "type", will cause logstash indexer to chok
 		<appender name="RedisAppender" type="redis4net.Appender.RedisAppender, redis4net">
 			<remoteAddress value="127.0.0.1" />
 			<remotePort value="6379" />
+			<password value="" />
+      <enableSSL value="false" />          
 			<listName value="logstash" />
 			<layout type="redis4net.Layout.LogMessageLayout, redis4net">
 				<param name="IncludeLocationInformation" value="true" />
