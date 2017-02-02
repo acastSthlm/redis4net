@@ -17,8 +17,18 @@ namespace redis4net.Layout
 		private Dictionary<string, string> innerAdditionalFields;
 		private string additionalFields;
 		private readonly PatternLayout patternLayout;
+        private static readonly Dictionary<string, int> levels = new Dictionary<string, int>
+        {
+            {"ALL", 10 },
+            {"DEBUG", 20 },
+            {"INFO", 30 },
+            {"WARN", 40 },
+            {"ERROR", 50 },
+            {"FATAL", 60 },
+            {"OFF", 0 }
+        };
 
-		public LogMessageLayout()
+        public LogMessageLayout()
 		{
 			IncludeLocationInformation = false;
 			LogStackTraceFromMessage = true;
@@ -211,17 +221,7 @@ namespace redis4net.Layout
 		}
 
 		private static int GetLevelAsNumber(Level level)
-		{
-			var levels = new Dictionary<string, int>
-			{
-				{"ALL", 10 },
-				{"DEBUG", 20 },
-				{"INFO", 30 },
-				{"WARN", 40 },
-				{"ERROR", 50 },
-				{"FATAL", 60 },
-				{"OFF", 0 }
-			};
+		{			
 			return levels.ContainsKey(level.Name) ? levels[level.Name] : 10;
 		}
 
