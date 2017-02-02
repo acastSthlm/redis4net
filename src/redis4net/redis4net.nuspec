@@ -9,7 +9,7 @@
     <licenseUrl>https://github.com/govin/redis4net</licenseUrl>
     <projectUrl>https://github.com/govin/redis4net</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
+    <description>Internal variant of redis4net, which is a log4net appender that formats logs and adds them to redis lists. This is useful when you have another system like logstash which indexes yours logs. The redis lists that you write to can feed into the logstash indexer.</description>
     <releaseNotes>Adapts to internal logstash setup</releaseNotes>
     <copyright>Copyright 2017</copyright>
     <tags>log4net redis logAppender</tags>
