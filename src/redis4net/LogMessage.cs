@@ -42,43 +42,43 @@ namespace redis4net
 			}
 		}
 
-        public int Level
-        {
-            get
-            {
-                if (!this.ContainsKey("level"))
-                    return int.MinValue;
+		public int Level
+		{
+			get
+			{
+				if (!this.ContainsKey("level"))
+					return int.MinValue;
 
-                return (int)this["level"];
-            }
-            set
-            {
-                if (!this.ContainsKey("level"))
-                    this.Add("level", value);
-                else
-                    this["level"] = value;
-            }
-        }
+				return (int)this["level"];
+			}
+			set
+			{
+				if (!this.ContainsKey("level"))
+					this.Add("level", value);
+				else
+					this["level"] = value;
+			}
+		}
 
-        public string LevelName
-        {
-            get
-            {
-                if (!this.ContainsKey("levelname"))
-                    return "INFO";
+		public string LevelName
+		{
+			get
+			{
+				if (!this.ContainsKey("levelname"))
+					return "INFO";
 
-                return (string)this["levelname"];
-            }
-            set
-            {
-                if (!this.ContainsKey("levelname"))
-                    this.Add("levelname", value);
-                else
-                    this["levelname"] = value;
-            }
-        }
+				return (string)this["levelname"];
+			}
+			set
+			{
+				if (!this.ContainsKey("levelname"))
+					this.Add("levelname", value);
+				else
+					this["levelname"] = value;
+			}
+		}
 
-        public string Host
+		public string Host
 		{
 			get
 			{
@@ -132,22 +132,22 @@ namespace redis4net
 			}
 		}
 
-        public string Time
-        {
-            get
-            {
-                if (!this.ContainsKey("time"))
-                    return DateTime.MinValue.ToShortDateString();
+		public string Time
+		{
+			get
+			{
+				if (!this.ContainsKey("time"))
+					return DateTime.MinValue.ToShortDateString();
 
-                return (string)this["time"]; ;
-            }
-            set
-            {
-                if (!this.ContainsKey("time"))
-                    this.Add("time", value);
-                else
-                    this["time"] = value;
-            }
-        }
-    }
+				return (string)this["time"];
+			}
+			set
+			{
+				if (!this.ContainsKey("time"))
+					this.Add("time", value);
+				else
+					this["time"] = value;
+			}
+		}
+	}
 }

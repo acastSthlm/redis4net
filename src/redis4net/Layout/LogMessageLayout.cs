@@ -134,16 +134,16 @@ namespace redis4net.Layout
 			var message = new LogMessage
 			{
 				Host = Environment.MachineName,
-                Level = GetLevelAsNumber(loggingEvent.Level),
-                LevelName = loggingEvent.Level.Name,
-                Time = loggingEvent.TimeStamp
-                    .ToUniversalTime()
-                    .ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
-            };
+				Level = GetLevelAsNumber(loggingEvent.Level),
+				LevelName = loggingEvent.Level.Name,
+				Time = loggingEvent.TimeStamp
+					.ToUniversalTime()
+					.ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
+			};
 
-            message.Add("loggername", loggingEvent.LoggerName);
+			message.Add("loggername", loggingEvent.LoggerName);
 
-            if (this.IncludeLocationInformation)
+			if (this.IncludeLocationInformation)
 			{
 				message.File = loggingEvent.LocationInformation.FileName;
 				message.Line = loggingEvent.LocationInformation.LineNumber;
@@ -210,22 +210,22 @@ namespace redis4net.Layout
 			}
 		}
 
-        private static int GetLevelAsNumber(Level level)
-        {
-            var levels = new Dictionary<string, int>
-            {
-                {"ALL", 10 },
-                {"DEBUG", 20 },
-                {"INFO", 30 },
-                {"WARN", 40 },
-                {"ERROR", 50 },
-                {"FATAL", 60 },
-                {"OFF", 0 }
-            };
-            return levels.ContainsKey(level.Name) ? levels[level.Name] : 10;
-        }
+		private static int GetLevelAsNumber(Level level)
+		{
+			var levels = new Dictionary<string, int>
+			{
+				{"ALL", 10 },
+				{"DEBUG", 20 },
+				{"INFO", 30 },
+				{"WARN", 40 },
+				{"ERROR", 50 },
+				{"FATAL", 60 },
+				{"OFF", 0 }
+			};
+			return levels.ContainsKey(level.Name) ? levels[level.Name] : 10;
+		}
 
-        private static long GetSyslogSeverity(Level level)
+		private static long GetSyslogSeverity(Level level)
 		{
 			if (level == log4net.Core.Level.Alert)
 				return (long)LocalSyslogAppender.SyslogSeverity.Alert;

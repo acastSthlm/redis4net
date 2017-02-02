@@ -9,9 +9,9 @@ namespace redis4net.Redis
 		private static readonly object Lock = new object();
 
 		private readonly string _hostname;
-        private readonly string _password;
-        private readonly int _portNumber;
-        private readonly bool _enableSSL;
+		private readonly string _password;
+		private readonly int _portNumber;
+		private readonly bool _enableSSL;
 		private readonly int _failedConnectionRetryTimeoutInSeconds;
 		private readonly string _listName;
 		private readonly IConnection _connection;
@@ -22,8 +22,8 @@ namespace redis4net.Redis
 
 			_hostname = hostName;
 			_portNumber = portNumber;
-            _password = password;
-            _enableSSL = enableSSL;
+			_password = password;
+			_enableSSL = enableSSL;
 			_failedConnectionRetryTimeoutInSeconds = failedConnectionRetryTimeoutInSeconds;
 			_listName = listName;
 		}

@@ -11,9 +11,9 @@ namespace redis4net.Appender
 		protected ConnectionFactory ConnectionFactory { get; set; }
 		public string RemoteAddress { get; set; }
 		public int RemotePort { get; set; }
-        public string Password { get; set; }
-        public bool EnableSSL { get; set; }
-        public string ListName { get; set; }
+		public string Password { get; set; }
+		public bool EnableSSL { get; set; }
+		public string ListName { get; set; }
 
 		public override void ActivateOptions()
 		{

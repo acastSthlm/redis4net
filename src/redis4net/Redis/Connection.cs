@@ -12,16 +12,16 @@ namespace redis4net.Redis
 
 		public void Open(string hostname, int port, string password, bool enableSSL, string listName)
 		{
-            _listName = listName;
-            var redisConfigOptions = new ConfigurationOptions
-            {
-                Ssl = enableSSL,
-                Password = password,
-                EndPoints = {
-                    { hostname + ":" + port }
-                }
-            };
-            redis = ConnectionMultiplexer.Connect(redisConfigOptions);
+			_listName = listName;
+			var redisConfigOptions = new ConfigurationOptions
+			{
+				Ssl = enableSSL,
+				Password = password,
+				EndPoints = {
+					{ hostname + ":" + port }
+				}
+			};
+			redis = ConnectionMultiplexer.Connect(redisConfigOptions);
 		}
 
 		public bool IsOpen()

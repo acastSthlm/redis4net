@@ -40,7 +40,7 @@ data types of fields within the same "type", will cause logstash indexer to chok
 			<remoteAddress value="127.0.0.1" />
 			<remotePort value="6379" />
 			<password value="" />
-      <enableSSL value="false" />          
+			<enableSSL value="false" />
 			<listName value="logstash" />
 			<layout type="redis4net.Layout.LogMessageLayout, redis4net">
 				<param name="IncludeLocationInformation" value="true" />
