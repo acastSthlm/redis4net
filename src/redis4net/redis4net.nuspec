@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://github.com/govin/redis4net</licenseUrl>
+    <projectUrl>https://github.com/govin/redis4net</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Internal variant of redis4net, which is a log4net appender that formats logs and adds them to redis lists. This is useful when you have another system like logstash which indexes yours logs. The redis lists that you write to can feed into the logstash indexer.</description>
+    <releaseNotes>Adapts to internal logstash setup</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>log4net redis logAppender</tags>
+    <dependencies>
+        <dependency id="Newtonsoft.Json" version="9.0.1" />
+        <dependency id="log4net" version="2.0.7" />
+        <dependency id="StackExchange.Redis" version="1.2.0" />
+    </dependencies>
+  </metadata>
+</package>

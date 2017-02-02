@@ -42,21 +42,39 @@ namespace redis4net
 			}
 		}
 
-		public long SysLogLevel
+		public int Level
 		{
 			get
 			{
-				if (!this.ContainsKey("sysloglevel"))
+				if (!this.ContainsKey("level"))
 					return int.MinValue;
 
-				return (long)this["sysloglevel"];
+				return (int)this["level"];
 			}
 			set
 			{
-				if (!this.ContainsKey("sysloglevel"))
-					this.Add("sysloglevel", value);
+				if (!this.ContainsKey("level"))
+					this.Add("level", value);
 				else
-					this["sysloglevel"] = value;
+					this["level"] = value;
+			}
+		}
+
+		public string LevelName
+		{
+			get
+			{
+				if (!this.ContainsKey("levelname"))
+					return "INFO";
+
+				return (string)this["levelname"];
+			}
+			set
+			{
+				if (!this.ContainsKey("levelname"))
+					this.Add("levelname", value);
+				else
+					this["levelname"] = value;
 			}
 		}
 
@@ -114,24 +132,21 @@ namespace redis4net
 			}
 		}
 
-		public DateTime TimeStamp
+		public string Time
 		{
 			get
 			{
-				if (!this.ContainsKey("timestamp"))
-					return DateTime.MinValue;
+				if (!this.ContainsKey("time"))
+					return DateTime.MinValue.ToShortDateString();
 
-				var val = this["timestamp"];
-				double value;
-				var parsed = double.TryParse(val as string, NumberStyles.Any, CultureInfo.InvariantCulture, out value);
-				return parsed ? value.FromUnixTimestamp() : DateTime.MinValue;
+				return (string)this["time"];
 			}
 			set
 			{
-				if (!this.ContainsKey("timestamp"))
-					this.Add("timestamp", value.ToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+				if (!this.ContainsKey("time"))
+					this.Add("time", value);
 				else
-					this["timestamp"] = value.ToUnixTimestamp().ToString(CultureInfo.InvariantCulture);
+					this["time"] = value;
 			}
 		}
 	}

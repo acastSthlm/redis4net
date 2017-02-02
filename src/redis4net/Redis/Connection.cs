@@ -10,17 +10,18 @@ namespace redis4net.Redis
 		private string _listName;
 		private ConnectionMultiplexer redis;
 
-		public void Open(string hostname, int port, string listName)
+		public void Open(string hostname, int port, string password, bool enableSSL, string listName)
 		{
-			try
+			_listName = listName;
+			var redisConfigOptions = new ConfigurationOptions
 			{
-				_listName = listName;
-				redis = ConnectionMultiplexer.Connect(string.Format("{0}:{1}", hostname, port));
-			}
-			catch
-			{
-				redis = null;
-			}
+				Ssl = enableSSL,
+				Password = password,
+				EndPoints = {
+					{ hostname + ":" + port }
+				}
+			};
+			redis = ConnectionMultiplexer.Connect(redisConfigOptions);
 		}
 
 		public bool IsOpen()

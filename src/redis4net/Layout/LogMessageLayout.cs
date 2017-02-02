@@ -17,8 +17,18 @@ namespace redis4net.Layout
 		private Dictionary<string, string> innerAdditionalFields;
 		private string additionalFields;
 		private readonly PatternLayout patternLayout;
+        private static readonly Dictionary<string, int> levels = new Dictionary<string, int>
+        {
+            {"ALL", 10 },
+            {"DEBUG", 20 },
+            {"INFO", 30 },
+            {"WARN", 40 },
+            {"ERROR", 50 },
+            {"FATAL", 60 },
+            {"OFF", 0 }
+        };
 
-		public LogMessageLayout()
+        public LogMessageLayout()
 		{
 			IncludeLocationInformation = false;
 			LogStackTraceFromMessage = true;
@@ -134,11 +144,14 @@ namespace redis4net.Layout
 			var message = new LogMessage
 			{
 				Host = Environment.MachineName,
-				SysLogLevel = GetSyslogSeverity(loggingEvent.Level),
-				TimeStamp = loggingEvent.TimeStamp,
+				Level = GetLevelAsNumber(loggingEvent.Level),
+				LevelName = loggingEvent.Level.Name,
+				Time = loggingEvent.TimeStamp
+					.ToUniversalTime()
+					.ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
 			};
 
-			message.Add("LoggerName", loggingEvent.LoggerName);
+			message.Add("loggername", loggingEvent.LoggerName);
 
 			if (this.IncludeLocationInformation)
 			{
@@ -205,6 +218,11 @@ namespace redis4net.Layout
 				writer.Flush();
 				return sb.ToString();
 			}
+		}
+
+		private static int GetLevelAsNumber(Level level)
+		{			
+			return levels.ContainsKey(level.Name) ? levels[level.Name] : 10;
 		}
 
 		private static long GetSyslogSeverity(Level level)

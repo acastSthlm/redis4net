@@ -1,9 +1,4 @@
-﻿using log4net;
-using log4net.Appender;
-using log4net.Core;
-using log4net.Repository;
-using log4net.Util;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -13,10 +8,15 @@ using System.IO;
 
 namespace redis4netTests.Layout
 {
-	using redis4net;
-	using redis4net.Layout;
+    using log4net;
+    using log4net.Appender;
+    using log4net.Core;
+    using log4net.Repository;
+    using log4net.Util;
+    using redis4net;
+    using redis4net.Layout;
 
-	[TestFixture]
+    [TestFixture]
 	public class LogMessageLayoutTests
 	{
 		[Test]
@@ -87,8 +87,9 @@ namespace redis4netTests.Layout
 
 			Assert.AreEqual(result.Message, message);
 			Assert.AreEqual(result.Host, Environment.MachineName);
-			Assert.AreEqual(result.SysLogLevel, (int)LocalSyslogAppender.SyslogSeverity.Debug);
-			Assert.IsTrue(result.TimeStamp >= DateTime.Now.AddMinutes(-1));
+			Assert.AreEqual(result.Level, 30);
+            Assert.AreEqual(result.LevelName, "DEBUG");
+            Assert.IsNotEmpty(result.Time);
 		}
 
 		[Test]
@@ -216,8 +217,8 @@ namespace redis4netTests.Layout
 			var result = GetMessage(layout, loggingEvent);
 
 			Assert.AreEqual(message, result.Message);
-			Assert.IsNotNullOrEmpty(result.Line);
-			Assert.IsNotNullOrEmpty(result.File);
+			Assert.IsNotEmpty(result.Line);
+			Assert.IsNotEmpty(result.File);
 		}
 
 		private LogMessage GetMessage(LogMessageLayout layout, LoggingEvent message)
